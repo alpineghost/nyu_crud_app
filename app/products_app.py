@@ -3,17 +3,25 @@
 
 import csv
 
-csv_file_path = "data/products.csv"
 
 ###counting rows from Prof Rossetti
 products = []
 
 csv_file_path = "data/products.csv"
 
+##Reading csv file
 with open(csv_file_path, "r") as csv_file:
     reader = csv.DictReader(csv_file)
     for row in reader:
         products.append(row)
+
+other_path = "data/other_products.csv"
+##writing csv file
+with open(other_path, "w", newline = '') as csv_file:
+    writer = csv.DictWriter(csv_file, fieldnames=["id", "name", "aisle","department","price"])
+    writer.writeheader() # uses fieldnames set above
+    for product in products:
+        writer.writerow(product)
 
 
 menu = """
@@ -69,13 +77,3 @@ with open(csv_file_path, "r") as csv_file:
     reader = csv.DictReader(csv_file) # assuming your CSV has headers, otherwise... csv.reader(csv_file)
     for row in reader:
         print(row["id"], row["name"])
-
-csv_file_path = "teams.csv"
-
-with open(csv_file_path, "w") as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
-    writer.writeheader() # uses fieldnames set above
-    writer.writerow({"city": "New York", "name": "Yankees"})
-    writer.writerow({"city": "New York", "name": "Mets"})
-    writer.writerow({"city": "Boston", "name": "Red Sox"})
-    writer.writerow({"city": "New Haven", "name": "Ravens"})
