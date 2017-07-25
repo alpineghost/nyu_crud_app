@@ -4,3 +4,12 @@
 #Installation
 
 #Usage
+
+To run:
+
+python app\products_app.py
+
+
+To test:
+
+pytest
