@@ -3,10 +3,7 @@
 
 import csv
 
-#Reading CSV Files
 
-
-###counting rows from Prof Rossetti
 products = []
 
 csv_file_path = "data/products.csv"
@@ -16,12 +13,7 @@ with open(csv_file_path, "r") as csv_file:
         products.append(dict(ordered_dict))
 
 other_path = "data/other_products.csv"
-##writing csv file
-#with open(other_path, "w", newline = '') as csv_file:
-#    writer = csv.DictWriter(csv_file, fieldnames=["id", "name", "aisle","department","price"])
-#    writer.writeheader() # uses fieldnames set above
-#    for product in products:
-#        writer.writerow(product)
+
 
 
 
@@ -35,7 +27,6 @@ menu = """
 
 """.format(len(products))
 
-#print(menu)
 
 chosen_operation = input(menu)
 chosen_operation = chosen_operation.title()
@@ -53,12 +44,7 @@ def show_product():
     for product in products:
         if product["id"] == selected_id:
             print(product)
-            #print(products[product_id == selected_id])
-    #csv_file_path = "data/products.csv"
-    #with open(csv_file_path, "r") as csv_file:
-    #    reader = csv.DictReader(csv_file)
-    #    if row["id"] == selected_id:
-    #        print(row)
+
 
 def create_product():
     print("CREATING A PRODUCT")
@@ -84,10 +70,10 @@ def update_product():
             selected_product = product
 
     print("Please specify the product's information...")
-    new_name = input ("Change name from " + str(selected_product["name"]) + " to: ")
-    new_aisle = input ("Change name from " + str(selected_product["aisle"]) + " to: ")
-    new_department = input ("Change name from " + str(selected_product["department"]) + " to: ")
-    new_price = input ("Change name from " + str(selected_product["price"]) + " to: ")
+    new_name = input ("Change name from '" + str(selected_product["name"]) + "' to: ")
+    new_aisle = input ("Change name from '" + str(selected_product["aisle"]) + "' to: ")
+    new_department = input ("Change name from '" + str(selected_product["department"]) + "' to: ")
+    new_price = input ("Change name from '" + str(selected_product["price"]) + "' to: ")
 
     for product in products:
         if product["id"] == selected_id:
@@ -97,7 +83,9 @@ def update_product():
             product["price"] = new_price
 
     print("UPDATING A PRODUCT")
-
+    for product in products:
+        if product["id"] == selected_id:
+            print(product)
 
 def destroy_product():
     selected_id = input("Ok. Please specify the product's id: ")
@@ -107,7 +95,7 @@ def destroy_product():
             selected_product = product
             print(selected_product)
             products.remove(selected_product)
-    #products.remove()
+
 
 if chosen_operation == "List":
     list_products()
